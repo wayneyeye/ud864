@@ -96,7 +96,7 @@
           var title = locations[i].title;
           // Create a marker per location, and put into markers array.
            var marker = new google.maps.Marker({
-            position: position,
+            position: position, //do not set map property at initial
             title: title,
             animation: google.maps.Animation.DROP,
             id: i
@@ -149,7 +149,7 @@
 
     <script async defer
         src=
-        "https://maps.googleapis.com/maps/api/js?key=MYAPIKEY&v=3&callback=initMap">
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAo3NPOuIY8TRn_m2yZ48rPWvx1PGj16Dw&v=3&callback=initMap">
     </script>
 
   </body>
