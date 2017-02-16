@@ -24,17 +24,48 @@ API Course, Lesson 1 -->
        // TODO: Create a single marker appearing on initialize -
        // Create it with the position of the singleLatLng,
        // on the map, and give it your own title!
+       function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.7413549, lng: -73.9980244},
+          zoom: 13
+        });
+      }
+      var marker = new google.maps.Marker({
+          position: singleLatLng,
+          map: map,
+          title: 'First Marker!',
+          animation: google.maps.Animation.DROP
+        });
+
 
        // TODO: create a single infowindow, with your own content.
        // It must appear on the marker
-
+      var largeInfowindow = new google.maps.InfoWindow();
        // TODO: create an EVENT LISTENER so that the infowindow opens when
        // the marker is clicked!
+      marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+          });
+      // This function populates the infowindow when the marker is clicked. We'll only allow
+      // one infowindow which will open at the marker that is clicked, and populate based
+      // on that markers position.
+      function populateInfoWindow(marker, infowindow) {
+        // Check to make sure the infowindow is not already opened on this marker.
+        if (infowindow.marker != marker) {
+          infowindow.marker = marker;
+          infowindow.setContent('<div>' +'Lat:'+ marker.getPosition().lat()+' Log:'+marker.getPosition().lng()+ '</div>');
+          infowindow.open(map, marker);
+          // Make sure the marker property is cleared if the infowindow is closed.
+          infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+          });
+        }
+      }
      }
    </script>
    <!--TODO: Insert your API Key in the below call to load the API.-->
    <script async defer
-     src="https://maps.googleapis.com/maps/api/js?v=3&key=XXX&callback=initMap">
+     src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyAo3NPOuIY8TRn_m2yZ48rPWvx1PGj16Dw&callback=initMap">
    </script>
  </body>
 </html>
